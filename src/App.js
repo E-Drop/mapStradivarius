@@ -7,7 +7,9 @@ class App extends Component {
   render() {
     return (
       <div>
-        <SearchBar/>
+        <div className="search-box">
+          <SearchBar/>
+        </div>
         <MapComponent/>
       </div>
     );
