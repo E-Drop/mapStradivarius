@@ -3,6 +3,8 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from 'react-places-autocomplete';
+import { connect } from 'react-redux';
+import { addMarker } from '../../actions/markersActions';
  
 class SearchBar extends React.Component {
   constructor(props) {
@@ -18,7 +20,7 @@ class SearchBar extends React.Component {
     this.setState({ address: '' });
     geocodeByAddress(address)
       .then(results => getLatLng(results[0]))
-      .then(latLng => console.log(latLng))
+      .then(latLng => this.props.addMarker(latLng))
       .catch(error => console.error('Error', error));
   };
  
@@ -66,4 +68,10 @@ class SearchBar extends React.Component {
     );
   }
 }
-export default SearchBar;
+
+const mapDispatchToProps = {
+  addMarker
+}
+
+export default connect(null,mapDispatchToProps)
+(SearchBar);
